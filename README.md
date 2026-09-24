@@ -72,27 +72,35 @@ npm start                      # http://localhost:5173
 
 ## 四、配置说明
 
-前端的全部配置集中在 `src/js/config.js`：
+前端的全部配置集中在 `src/js/config.js`，里面区分了**本地**和**线上**两套后端地址：
 
 ```js
-const DEFAULT_API_BASE = 'http://127.0.0.1:3000/api';  // 后端接口地址
-const PAGE_SIZE = 8;                                    // 历史记录每页条数
+const LOCAL_API_BASE = 'http://127.0.0.1:3000/api';   // 本地开发用的后端地址
+const PROD_API_BASE  = 'https://xxx.onrender.com/api'; // 线上部署后的后端地址
+
+// 页面会根据当前域名自动选择，不需要手动切换
 const CONFIG = {
-  API_BASE: window.CALCULATOR_API_BASE || DEFAULT_API_BASE,
-  PAGE_SIZE,
+  API_BASE: window.CALCULATOR_API_BASE || (isLocalEnvironment() ? LOCAL_API_BASE : PROD_API_BASE),
+  PAGE_SIZE: 8,             // 历史记录每页条数
   TIMEOUT: 8000,            // 请求超时（毫秒）
   SEARCH_DEBOUNCE: 350,     // 搜索防抖（毫秒）
 };
 ```
 
-**部署时切换后端地址有两种方式：**
+判断规则：域名是 `localhost` / `127.0.0.1`，或直接用 `file://` 双击打开网页（域名为空）
+时使用 `LOCAL_API_BASE`，其余情况使用 `PROD_API_BASE`。
+**因此同一份代码在本地和线上都能直接用，不需要改代码。**
 
-1. 直接修改 `DEFAULT_API_BASE`；
+**部署时切换后端地址有三种方式：**
+
+1. 修改 `PROD_API_BASE` 为你自己的后端地址；
 2. 在 `index.html` 中、`config.js` **之前**插入一行，覆盖而不改源码：
 
    ```html
    <script>window.CALCULATOR_API_BASE = 'https://your-backend.example.com/api';</script>
    ```
+
+3. 在 `index.html` 中定义 `window.CALCULATOR_API_BASE`，这条优先级最高。
 
 ---
 
