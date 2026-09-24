@@ -201,8 +201,43 @@ calculator_frontend/
 
 这是纯静态站点，可以把 `src/` 目录内容直接部署到任意静态托管服务：
 
-- GitHub Pages
+- GitHub Pages（本项目实际采用）
 - Netlify / Vercel
 - 任意 Nginx / Apache 静态目录
 
 部署后记得把后端地址配置成线上的后端地址（见第四节）。
+
+### 本项目的在线地址
+
+| 内容 | 地址 |
+| --- | --- |
+| 前端页面 | https://huang-qw.github.io/832401208-calculator-frontend/ |
+| 后端接口 | https://calculator-backend.onrender.com/api |
+| 后端健康检查 | https://calculator-backend.onrender.com/api/health |
+
+### GitHub Pages 自动部署说明
+
+仓库内置了 `.github/workflows/deploy-pages.yml`，代码推送到 `main` 分支后会自动发布：
+
+```yaml
+on:
+  push:
+    branches: [main]     # 推送即触发
+  workflow_dispatch:      # 也支持在 Actions 页面手动触发
+
+permissions:
+  contents: read
+  pages: write           # 发布 Pages 所需
+  id-token: write        # OIDC 令牌，deploy-pages 需要
+```
+
+工作流把仓库里的 `src/` 目录作为静态站点根目录上传，因此不需要任何构建步骤。
+
+**首次部署需要先在仓库设置里做两件事**（之后就不用再管了）：
+
+1. `Settings → Actions → General → Workflow permissions` 选择 **Read and write permissions**，
+   否则工作流里的 `pages: write` 会被仓库的只读默认设置覆盖，导致配置 Pages 失败；
+2. `Settings → Pages → Build and deployment → Source` 选择 **GitHub Actions**。
+
+完成上述设置后，在 `Actions` 页面点 **Re-run all jobs** 重新执行一次即可。
+
