@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>计算器 · 前后端分离</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- ============ 左侧：计算器 ============ -->
+    <section class="panel calc-panel">
+      <header class="panel-header">
+        <h1 class="panel-title">计算器</h1>
+        <span class="status" id="status" data-state="unknown">
+          <i class="status-dot"></i><span id="status-text">连接中…</span>
+        </span>
+      </header>
+
+      <!-- 显示屏：算式 / 结果 / 错误提示 -->
+      <div class="display">
+        <div class="display-expression" id="expression">0</div>
+        <div class="display-result" id="result">=</div>
+        <div class="display-error" id="error" hidden></div>
+      </div>
+
+      <!-- 键盘：全部按键只负责拼接算式，不做任何计算 -->
+      <div class="keys" id="keys">
+        <button class="key key-fn" data-action="clear">AC</button>
+        <button class="key key-fn" data-key="(">(</button>
+        <button class="key key-fn" data-key=")">)</button>
+        <button class="key key-fn" data-action="backspace" title="退格">⌫</button>
+
+        <button class="key" data-key="7">7</button>
+        <button class="key" data-key="8">8</button>
+        <button class="key" data-key="9">9</button>
+        <button class="key key-op" data-key="/">÷</button>
+
+        <button class="key" data-key="4">4</button>
+        <button class="key" data-key="5">5</button>
+        <button class="key" data-key="6">6</button>
+        <button class="key key-op" data-key="*">×</button>
+
+        <button class="key" data-key="1">1</button>
+        <button class="key" data-key="2">2</button>
+        <button class="key" data-key="3">3</button>
+        <button class="key key-op" data-key="-">−</button>
+
+        <button class="key" data-key="0">0</button>
+        <button class="key" data-key=".">.</button>
+        <button class="key key-op" data-key="+">+</button>
+        <button class="key key-eq" data-action="equals">=</button>
+      </div>
+
+      <p class="tip">
+        提示：算式由<b>后端</b>解析与计算，前端不做任何运算。支持括号、优先级、正负号。
+      </p>
+    </section>
+
+    <!-- ============ 右侧：计算历史 ============ -->
+    <section class="panel history-panel">
+      <header class="panel-header">
+        <h2 class="panel-title">计算历史</h2>
+        <span class="history-count" id="history-count">共 0 条</span>
+      </header>
+
+      <div class="history-tools">
+        <input
+          class="history-search"
+          id="search-input"
+          type="search"
+          placeholder="搜索表达式关键字…"
+        />
+        <button class="btn" id="refresh-btn" title="重新从后端加载">刷新</button>
+        <button class="btn btn-danger" id="clear-btn" title="清空全部历史">清空</button>
+      </div>
+
+      <ul class="history-list" id="history-list"></ul>
+
+      <footer class="history-footer">
+        <button class="btn" id="prev-btn">上一页</button>
+        <span class="page-info" id="page-info">第 1 / 1 页</span>
+        <button class="btn" id="next-btn">下一页</button>
+      </footer>
+    </section>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/calculator.js"></script>
+  <script src="js/history.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

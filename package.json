@@ -1,0 +1,20 @@
+{
+  "name": "calculator-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "前后端分离计算器系统 —— 前端（界面展示与接口调用）",
+  "scripts": {
+    "start": "node scripts/dev-server.js",
+    "dev": "node scripts/dev-server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "calculator",
+    "frontend",
+    "fetch",
+    "vanilla-js"
+  ],
+  "license": "MIT"
+}
