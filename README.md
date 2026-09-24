@@ -75,8 +75,8 @@ npm start                      # http://localhost:5173
 前端的全部配置集中在 `src/js/config.js`，里面区分了**本地**和**线上**两套后端地址：
 
 ```js
-const LOCAL_API_BASE = 'http://127.0.0.1:3000/api';   // 本地开发用的后端地址
-const PROD_API_BASE  = 'https://xxx.onrender.com/api'; // 线上部署后的后端地址
+const LOCAL_API_BASE = 'http://127.0.0.1:3000/api';                    // 本地开发用的后端地址
+const PROD_API_BASE  = 'https://calculator-backend-arto.onrender.com/api'; // 线上部署后的后端地址
 
 // 页面会根据当前域名自动选择，不需要手动切换
 const CONFIG = {

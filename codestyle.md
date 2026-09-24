@@ -28,7 +28,7 @@
 | --- | --- | --- |
 | 变量 / 函数 | 小驼峰 | `expression`、`renderExpression` |
 | 全局模块对象 | 大驼峰 | `Api`、`Calculator`、`History`、`App` |
-| 常量 | 全大写下划线 | `MAX_LENGTH`、`DEFAULT_API_BASE` |
+| 常量 | 全大写下划线 | `MAX_LENGTH`、`LOCAL_API_BASE` |
 | 私有变量 | 用 IIFE 作用域隐藏，不加下划线 | `let expression` |
 | CSS 类名 | 小写 + 中划线（BEM 的块-元素写法） | `panel-header`、`history-item`、`key-op` |
 | 状态类 | `is-` 前缀 | `is-active`、`is-error` |
